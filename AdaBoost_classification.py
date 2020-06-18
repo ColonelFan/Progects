@@ -1,33 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-__title__ = ''
+__title__ = 'AdaBoost Classification'
 __author__ = 'Fan Shuai'
-__mtime__ = '2020/6/17'
+__mtime__ = '2020/6/18'
 """
 
 
-from xgboost import XGBClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from SVM_classification import get_data, reuslt_handle
 
 
 """
-XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
-       colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
-       importance_type='gain', interaction_constraints='',
-       learning_rate=0.300000012, max_delta_step=0, max_depth=6,
-       min_child_weight=1, missing=nan, monotone_constraints='()',
-       n_estimators=100, n_jobs=0, num_parallel_tree=1,
-       objective='multi:softprob', random_state=0, reg_alpha=0,
-       reg_lambda=1, scale_pos_weight=None, subsample=1,
-       tree_method='exact', validate_parameters=1, verbosity=None)
+AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None)
 """
 
 
 def prdedict_mode(X_train, y_train, X_predict):
-    xgbc = XGBClassifier()
-    xgbc.fit(X_train, y_train)
-    y_predict = xgbc.predict(X_predict)
+    bdt = AdaBoostClassifier()
+    bdt.fit(X_train, y_train)
+    y_predict = bdt.predict(X_predict)
+    # print(y_predict)
     return y_predict
 
 
@@ -40,7 +34,7 @@ if __name__ == '__main__':
 
         a = ["G:\Coding Program\General Algorithm\iris_train.csv",
              "G:\Coding Program\General Algorithm\iris_test.csv",
-             "G:\Coding Program\General Algorithm\XGBoost_results.csv"]
+             "G:\Coding Program\General Algorithm\AdaBoost_results.csv"]
 
         X_train, y_train, X_predict = get_data(a[0], a[1])
 
