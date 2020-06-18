@@ -19,10 +19,7 @@ SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
 """
 
 
-def get_data(a):
-    train_data_address = a[0]
-    predict_data_address = a[1]
-
+def get_data(train_data_address, predict_data_address):
     train_data = pd.read_csv(train_data_address)
     X_train = train_data.iloc[:, 0:(train_data.shape[1] - 1)]
     y_train = train_data.iloc[:, (train_data.shape[1] - 1)]
@@ -41,26 +38,32 @@ def prdedict_mode(X_train, y_train, X_predict):
 
 
 # results has independent variables and dependent variables
-def reuslt_handle(X_predict, y_predict, a):
+def reuslt_handle(X_predict, y_predict, predict_result_address):
     y_predict = pd.DataFrame(y_predict)
     y_predict.columns = ['Species']
     predict_data = pd.concat([X_predict, y_predict], axis=1)
-    predict_data.to_csv(a[2], index=0)
+    predict_data.to_csv(predict_result_address, index=0)
 
 
 if __name__ == '__main__':
-    # a = []
-    # for i in range(1, len(sys.argv)):
-    #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
-    #     a.append((str(sys.argv[i])))
+    try:
+        # a = []
+        # for i in range(1, len(sys.argv)):
+        #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
+        #     a.append((str(sys.argv[i])))
 
-    a = ["G:\Coding Program\General Algorithm\iris_train.csv",
-         "G:\Coding Program\General Algorithm\iris_test.csv",
-         "G:\Coding Program\General Algorithm\SVM_results.csv"]
+        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
+             "G:\Coding Program\General Algorithm\iris_test.csv",
+             "G:\Coding Program\General Algorithm\SVM_results.csv"]
 
-    X_train, y_train, X_predict = get_data(a)
+        X_train, y_train, X_predict = get_data(a[0], a[1])
 
-    # predict
-    y_predict = prdedict_mode(X_train, y_train, X_predict)
-    # output results to csv
-    reuslt_handle(X_predict, y_predict, a)
+        # predict
+        y_predict = prdedict_mode(X_train, y_train, X_predict)
+        # output results to csv
+        reuslt_handle(X_predict, y_predict, a[2])
+        print_result = "1"
+    except:
+        print_result = "0"
+
+    print(print_result)
