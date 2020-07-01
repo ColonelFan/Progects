@@ -17,6 +17,7 @@ MultinomialNB(alpha=1.0, class_prior=None, fit_prior=True)
 
 
 def prdedict_mode(X_train, y_train, X_predict):
+    # MultinomialNB can be changed to GaussianNB , GaussianNB has not alpha
     mnb = MultinomialNB()
     mnb.fit(X_train, y_train)
     y_predict = mnb.predict(X_predict)
@@ -31,8 +32,8 @@ if __name__ == '__main__':
         #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
         #     a.append((str(sys.argv[i])))
 
-        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
-             "G:\Coding Program\General Algorithm\iris_test.csv",
+        a = ["G:\Coding Program\General Algorithm\iris_train_classification.csv",
+             "G:\Coding Program\General Algorithm\iris_test_classification.csv",
              r"G:\Coding Program\General Algorithm\NB_results.csv"]
 
         X_train, y_train, X_predict = get_data(a[0], a[1])

@@ -3,7 +3,7 @@
 """
 __title__ = 'DBSCAN Cluster'
 __author__ = 'Fan Shuai'
-__mtime__ = '2020/6/29'
+__mtime__ = '2020/6/30'
 """
 
 
@@ -41,10 +41,10 @@ if __name__ == '__main__':
         #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
         #     a.append((str(sys.argv[i])))
 
-        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
+        a = ["G:\Coding Program\General Algorithm\iris_cluster.csv",
              "G:\Coding Program\General Algorithm\DBSCAN_results.csv"]
 
-        X_data, y_data = get_data_cl(a[0])
+        X_data = get_data_cl(a[0])
 
         # cluster
         y_labels = cluster_mode(X_data)

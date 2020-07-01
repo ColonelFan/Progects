@@ -40,8 +40,8 @@ if __name__ == '__main__':
         #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
         #     a.append((str(sys.argv[i])))
 
-        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
-             "G:\Coding Program\General Algorithm\iris_test.csv",
+        a = ["G:\Coding Program\General Algorithm\iris_train_classification.csv",
+             "G:\Coding Program\General Algorithm\iris_test_classification.csv",
              "G:\Coding Program\General Algorithm\KNN_results.csv"]
 
         X_train, y_train, X_predict = get_data(a[0], a[1])

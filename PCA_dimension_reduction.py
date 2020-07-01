@@ -3,7 +3,7 @@
 """
 __title__ = 'PCA Dimension Reduction'
 __author__ = 'Fan Shuai'
-__mtime__ = '2020/6/28'
+__mtime__ = '2020/6/30'
 """
 
 
@@ -21,10 +21,9 @@ PCA(copy=True, iterated_power='auto', n_components=2, random_state=None,
 
 def get_data_dr(train_data_address):
     train_data = pd.read_csv(train_data_address)
-    X_train = train_data.iloc[:, 0:(train_data.shape[1] - 1)]
-    y_train = train_data.iloc[:, (train_data.shape[1] - 1)]
+    X_train = train_data.iloc[:, 0:train_data.shape[1]]
 
-    return X_train, y_train
+    return X_train
 
 
 def dimension_reduction(X_train, n_components):
@@ -39,28 +38,31 @@ def dimension_reduction(X_train, n_components):
 
 
 # results after dimension reduction
-def reuslt_handle(X_train_pca, y_train, reduction_result_address):
+def reuslt_handle(X_train_pca, reduction_result_address):
     X_train_pca = pd.DataFrame(X_train_pca)
-    y_train = pd.DataFrame(y_train)
-    y_train.columns = ['Species']
-    reduction_data = pd.concat([X_train_pca, y_train], axis=1)
-    reduction_data.to_csv(reduction_result_address, index=0)
+    X_train_pca.to_csv(reduction_result_address, index=0)
 
 
 if __name__ == '__main__':
-    # a = []
-    # for i in range(1, len(sys.argv)):
-    #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
-    #     a.append((str(sys.argv[i])))
+    try:
+        # a = []
+        # for i in range(1, len(sys.argv)):
+        #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
+        #     a.append((str(sys.argv[i])))
 
-    a = ["G:\Coding Program\General Algorithm\iris_train.csv",
-         "G:\Coding Program\General Algorithm\PCA_results.csv"]
+        a = ["G:\Coding Program\General Algorithm\iris_reduction_dimension.csv",
+             "G:\Coding Program\General Algorithm\PCA_results.csv"]
 
-    X_train, y_train = get_data_dr(a[0])
-    # amount of dimension after reduction, all/2
-    n_components = math.ceil(X_train.shape[1]/2)
+        X_train = get_data_dr(a[0])
+        # amount of dimension after reduction, all/2
+        n_components = math.ceil(X_train.shape[1]/2)
 
-    # reduction dimension
-    X_train_pca = dimension_reduction(X_train, n_components)
-    # output results to csv
-    reuslt_handle(X_train_pca, y_train, a[1])
+        # reduction dimension
+        X_train_pca = dimension_reduction(X_train, n_components)
+        # output results to csv
+        reuslt_handle(X_train_pca, a[1])
+        print_result = "1"
+    except:
+        print_result = "0"
+
+    print(print_result)

@@ -3,7 +3,7 @@
 """
 __title__ = 'K-means Cluster'
 __author__ = 'Fan Shuai'
-__mtime__ = '2020/6/29'
+__mtime__ = '2020/6/30'
 """
 
 
@@ -21,10 +21,9 @@ KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
 
 def get_data_cl(data_address):
     data = pd.read_csv(data_address)
-    X_data = data.iloc[:, 0:(data.shape[1] - 1)]
-    y_data = data.iloc[:, (data.shape[1] - 1)]
+    X_data = data.iloc[:, 0:data.shape[1]]
 
-    return X_data, y_data
+    return X_data
 
 
 def cluster_mode(X_data, n_clusters):
@@ -52,12 +51,12 @@ if __name__ == '__main__':
         #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
         #     a.append((str(sys.argv[i])))
 
-        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
+        a = ["G:\Coding Program\General Algorithm\iris_cluster.csv",
              "G:\Coding Program\General Algorithm\K_means_results.csv"]
 
-        X_data, y_data = get_data_cl(a[0])
-        # cluster center amount, equal to labels amount
-        n_clusters = len(np.unique(y_data))
+        X_data = get_data_cl(a[0])
+        # cluster center amount
+        n_clusters = 3
 
         # cluster
         y_labels = cluster_mode(X_data, n_clusters)

@@ -9,6 +9,7 @@ __mtime__ = '2020/6/18'
 
 from sklearn.ensemble import AdaBoostClassifier
 from SVM_classification import get_data, reuslt_handle
+from sklearn.preprocessing import StandardScaler
 
 
 """
@@ -18,6 +19,11 @@ AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
 
 
 def prdedict_mode(X_train, y_train, X_predict):
+    # normalize
+    ss = StandardScaler()
+    X_train = ss.fit_transform(X_train)
+    X_predict = ss.transform(X_predict)
+
     bdt = AdaBoostClassifier()
     bdt.fit(X_train, y_train)
     y_predict = bdt.predict(X_predict)
@@ -32,8 +38,8 @@ if __name__ == '__main__':
         #     # a.append((int(sys.argv[i]))), caution 'int' or 'str'
         #     a.append((str(sys.argv[i])))
 
-        a = ["G:\Coding Program\General Algorithm\iris_train.csv",
-             "G:\Coding Program\General Algorithm\iris_test.csv",
+        a = ["G:\Coding Program\General Algorithm\iris_train_classification.csv",
+             "G:\Coding Program\General Algorithm\iris_test_classification.csv",
              "G:\Coding Program\General Algorithm\AdaBoost_results.csv"]
 
         X_train, y_train, X_predict = get_data(a[0], a[1])
